@@ -1,5 +1,5 @@
 <?php
-// src/Contact/Controller/ContactController.php
+// src/Controller/ContactController.php
 
 namespace App\Controller;
 
@@ -25,7 +25,13 @@ class ContactController
  	*/
 	public function index(Environment $twig): Response
 	{
-		$content = $twig->render('Contact/index.html.twig');
+		$content = $twig->render('index.html.twig');
+		return new Response($content);
+	}
+
+	public function add(Environment $twig): Response
+	{
+		$content = $twig->render('add.html.twig');
 		return new Response($content);
 	}
 

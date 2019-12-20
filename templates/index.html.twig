@@ -1,0 +1,7 @@
+{# templates/Contact/index.html.twig #}
+
+{% extends "base.html.twig" %}
+
+{% block body %}
+	{{ render(controller('App\\Controller\\ContactController::add')) }}
+{% endblock %}

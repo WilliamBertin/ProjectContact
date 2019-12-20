@@ -1,12 +1,34 @@
-<!DOCTYPE html>
+{# templates/base.html.twig #}
+
+<!DOCTYPE HTML>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-    </body>
+<head>
+  <meta charset="UTF-8">
+  {% block stylesheet %}
+  	<link rel="stylesheet" href="{{ asset('css/base.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/icon.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/add.css') }}" />
+  {% endblock %}
+  <title>
+  	{% block title %} {{ sitename }} {% endblock %}
+  </title>
+</head>
+<body>
+	{% block javascript %}
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+     <script src="{{ asset('js/add.js') }}"></script>
+	{% endblock %}
+
+  <div class="header-container">
+	   <div class="header-container__appName"> {{ sitename }} </div>
+  </div>
+  <div class="body-container">
+      <div class="body-container__title">Votre liste de contact</div>
+     {% block body %}
+  	 {% endblock %}
+  </div>
+</body>
+<div class="footer-container">
+  <div class="footer-container__content">{% block footer %} Developed by {{ webmaster }}  {% endblock %}</footer> </div>
+</div>
 </html>

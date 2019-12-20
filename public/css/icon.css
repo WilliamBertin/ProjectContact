@@ -1,0 +1,40 @@
+.form-add-contact-container__addIcon
+{
+  height:40px; 
+  width:40px; 
+  display:block; 
+  position:relative;
+} 
+
+.addIcon
+{
+  border-radius:50px;
+  -webkit-border-radius:50px;
+  -moz-border-radius:50px; 
+  border:4px solid #333; 
+  width:32px; 
+  height:32px;
+}
+
+.addIcon:before, .addIcon:after
+{
+  content:''; 
+  height:4px; 
+  width:24px; 
+  display:block; 
+  background:#333; 
+  border-radius:10px;
+  -webkit-border-radius:10px;
+  -moz-border-radius:10px; 
+  position:absolute; 
+  top:14px; 
+  left:4px;
+}
+
+.addIcon:after
+{
+  height:24px; 
+  width:4px; 
+  top:4px; 
+  left:14px;
+}
