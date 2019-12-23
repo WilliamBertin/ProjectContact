@@ -2,7 +2,29 @@
 
 	<div class="form-add-contact-container__addIcon addIcon" id="add-contact"></div>
 	<div class="form-add-contact-container__addIcon-title">Ajouter un contact</div>
-
 </div>
 
-<div class="form-add-contact-container__form" id="add-form">test</div>
+<div class="form-add-contact-container__form" id="add-form">
+{{ form_start(form) }}
+
+    <div class="form-field">
+        {{ form_widget(form.firstname) }} 
+    </div>
+    <div class="form-field">
+        {{ form_widget(form.lastname) }}
+    </div>
+    <div class="form-field">
+        {{ form_widget(form.fullname) }}
+        {{ form_errors(form.fullname) }}
+    </div>
+    <div class="form-field">
+        {{ form_widget(form.email) }}
+        {{ form_errors(form.email) }}
+    </div>
+
+    <button id="#addForm-submit" type="submit" value="Ajouter" class="button-base">Ajouter</button>
+
+{{ form_end(form) }}
+
+</div>
+<div class="button"></div>

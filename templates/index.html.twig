@@ -4,4 +4,7 @@
 
 {% block body %}
 	{{ render(controller('App\\Controller\\ContactController::add')) }}
+	<div class="view-contact-container-content">
+	{{ render(controller('App\\Controller\\ContactController::view')) }}
+	</div>
 {% endblock %}

@@ -19,5 +19,16 @@
 
 .form-add-contact-container__form
 {
-  display: none;
+	display: none;
+	margin: 15px auto;
+}
+
+.form-field {
+	display: inline-block;
+	margin: 10px;
+}
+
+.form-submit {
+
+	
 }

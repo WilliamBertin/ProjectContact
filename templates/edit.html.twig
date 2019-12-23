@@ -1,0 +1,18 @@
+	{{ form_start(form) }}
+    <div class="form-field">
+        {{ form_widget(form.firstname) }} 
+    </div>
+    <div class="form-field">
+        {{ form_widget(form.lastname) }}
+    </div>
+    <div class="form-field">
+        {{ form_widget(form.fullname) }}
+        {{ form_errors(form.fullname) }}
+    </div>
+    <div class="form-field">
+        {{ form_widget(form.email) }}
+        {{ form_errors(form.email) }}
+    </div>
+
+    <button id="#editForm-submit" type="submit" value="Éditer" class="button-base">Éditer</button>
+{{ form_end(form) }}
