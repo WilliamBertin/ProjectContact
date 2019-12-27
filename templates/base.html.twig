@@ -5,32 +5,32 @@
 <head>
   <meta charset="UTF-8">
   {% block stylesheet %}
-  	<link rel="stylesheet" href="{{ asset('css/base.css') }}" />
-    <link rel="stylesheet" href="{{ asset('css/icon.css') }}" />
-    <link rel="stylesheet" href="{{ asset('css/add.css') }}" />
-     <link rel="stylesheet" href="{{ asset('css/view.css') }}" />
+    <link rel="stylesheet" href="{{ asset('build/app.css') }}" /> 
   {% endblock %}
   <title>
-  	{% block title %} {{ sitename }} {% endblock %}
+    {% block title %} {{ sitename }} {% endblock %}
   </title>
 </head>
 <body>
-	{% block javascript %}
+  {% block javascript %}
+     <script src="{{ asset('build/app.js') }}"></script>
      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-     <script src="{{ asset('js/add.js') }}"></script>
-	{% endblock %}
+   <script src="{{ asset('js/main.js') }}"></script>
+  {% endblock %}
 
   <div class="header-container">
-	   <div class="header-container__appName"> {{ sitename }} </div>
+     <div class="header-container__content"> {{ sitename }} </div>
+  </div>
+  <div class="overlay">
   </div>
   <div class="body-container">
-      <div class="body-container__title">Votre liste de contact</div>
      {% block body %}
 
-  	 {% endblock %}
+     {% endblock %}
   </div>
+  <footer>
+    <div class="footer-content">{% block footer %} Developed by {{ webmaster }}  {% endblock %} </div>
+  </footer>
 </body>
-<div class="footer-container">
-  <div class="footer-container__content">{% block footer %} Developed by {{ webmaster }}  {% endblock %}</footer> </div>
 </div>
 </html>

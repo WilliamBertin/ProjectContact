@@ -17,6 +17,6 @@ return [
     '_profiler_exception_css' => [['token'], ['_controller' => 'web_profiler.controller.exception_panel::stylesheet'], [], [['text', '/exception.css'], ['variable', '/', '[^/]++', 'token'], ['text', '/_profiler']], [], []],
     'oc_contact_index' => [[], ['_controller' => 'App\\Controller\\ContactController::index'], [], [['text', '/contact/']], [], []],
     'oc_contact_add' => [[], ['_controller' => 'App\\Controller\\ContactController::add'], [], [['text', '/contact/add']], [], []],
-    'oc_contact_view' => [[], ['_controller' => 'App\\Controller\\ContactController::view'], [], [['text', '/contact/']], [], []],
     'oc_contact_edit' => [['id'], ['_controller' => 'App\\Controller\\ContactController::edit'], ['id' => '\\d+'], [['variable', '/', '\\d+', 'id'], ['text', '/contact/edit']], [], []],
+    'oc_contact_view' => [[], ['_controller' => 'App\\Controller\\ContactController::trash'], [], [['text', '/contact/']], [], []],
 ];

@@ -1,10 +1,47 @@
-{# templates/Contact/index.html.twig #}
+{# templates/index.html.twig #}
 
 {% extends "base.html.twig" %}
 
 {% block body %}
-	{{ render(controller('App\\Controller\\ContactController::add')) }}
-	<div class="view-contact-container-content">
-	{{ render(controller('App\\Controller\\ContactController::view')) }}
+
+	{% for msg in app.session.flashBag.get('success') %}
+    <div class="notice-contact-container-content">
+    	<i class="validate-icon"></i>
+    	<span class="notice-contact-container-content__message">{{ msg }}</span>
+     </div>
+    {% endfor %}
+
+	<div class="contactApp-container">
+		<div class="contactApp-container__title-container" id="contactApp-container__addContent-trigger">
+			<div class="icon icon-contact"></div>
+			<div class="title-line">Ajouter un contact</div>
+			<div class="deploy-icon"></div>
+		</div>
+		<div class="contactApp-container__content" id="contactApp-container__addContent">
+			{{ render(controller('App\\Controller\\ContactController::add')) }}
+		</div>
 	</div>
+
+	<div class="contactApp-container">
+		<div class="contactApp-container__title-container" id="contactApp-container__viewContent-trigger">
+			<div class="icon icon-address-book"></div>
+			<div class="title-line">Votre répertoire</div>
+			<div class="deploy-icon deployed"></div>
+		</div>
+		<div class="contactApp-container__content view-list" id="contactApp-container__viewContent">
+			{{ render(controller('App\\Controller\\ContactController::view')) }}
+		</div>
+	</div>
+
+	<div class="contactApp-container">
+		<div class="contactApp-container__title-container" id="contactApp-container__trashContent-trigger">
+			<div class="icon icon-trash"></div>
+			<div class="title-line">Votre corbeille</div>
+			<div class="deploy-icon"></div>
+		</div>
+		<div class="contactApp-container__content" id="contactApp-container__trashContent">
+			{{ render(controller('App\\Controller\\ContactController::trash')) }}
+		</div>
+	</div>
+
 {% endblock %}

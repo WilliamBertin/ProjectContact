@@ -1,0 +1,23 @@
+{% if emptyTrash %}
+    <div class="contactApp-container__content-notice">Votre corbeille est vide</div>
+{% else %}
+    {{ form_start(form, {'attr': {'name': 'contact_form' }}) }}
+
+        <div class="form-field">
+            {{ form_widget(form.firstname) }} 
+        </div>
+        <div class="form-field">
+            {{ form_widget(form.lastname) }}
+        </div>
+        <div class="form-field">
+            {{ form_widget(form.fullname) }}
+            {{ form_errors(form.fullname) }}
+        </div>
+        <div class="form-field">
+            {{ form_widget(form.email) }}
+            {{ form_errors(form.email) }}
+        </div>
+        <button type="submit" name="edit"   value="Remettre dans l'annuaire"  class="button-base">Remettre dans l'annuaire</button>
+        <button type="submit" name="delete" value="Supprimer définitivement"  class="button-base">Supprimer définitivement</button>
+    {{ form_end(form) }}
+{% endif %}

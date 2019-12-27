@@ -1,11 +1,11 @@
 <?php
 namespace App\Entity;
 
-
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * *@ORM\Entity*@ORM\Table(name="contact")
+ * @ORM\Entity*@ORM\Table(name="contact")
  */
 class Contact
 {
@@ -18,12 +18,12 @@ class Contact
     public $id;
 
     /**
-    * @ORM\Column(name="firstname", type="text")
+    * @ORM\Column(name="firstname", type="text", nullable=true)
     */
     public $firstname;
 
     /**
-     * @ORM\Column(name="lastname", type="text")
+     * @ORM\Column(name="lastname", type="text", nullable=true)
      */
     public $lastname;
 
@@ -36,6 +36,11 @@ class Contact
      * @ORM\Column(name="email", type="text")
      */
     public $email;
+
+    /**
+     * @ORM\Column(name="isTrash", type="boolean", options={"default":"0"})
+     */
+    public $isTrash = false;
 
     public function getId(): int 
     {
@@ -62,6 +67,11 @@ class Contact
         return $this->email;
     }
 
+    public function getIsTrash()
+    {
+        return $this->isTrash;
+    }
+
     public function setFirstname(string $firstname)
     {
         $this->firstname = $firstname;
@@ -86,4 +96,9 @@ class Contact
         return $this->email;
     }
 
+    public function setIsTrash(bool $isTrash)
+    {
+        $this->isTrash = $isTrash;
+        return $this->isTrash;
+    }
 }

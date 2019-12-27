@@ -1,4 +1,5 @@
-	{{ form_start(form) }}
+{{ form_start(form, {'attr': {'name': 'contact_form' }}) }}
+
     <div class="form-field">
         {{ form_widget(form.firstname) }} 
     </div>
@@ -14,5 +15,6 @@
         {{ form_errors(form.email) }}
     </div>
 
-    <button id="#editForm-submit" type="submit" value="Éditer" class="button-base">Éditer</button>
+    <button type="submit" name="edit"  value="Éditer"                 class="button-base">Éditer</button>
+    <button type="submit" name="trash" value="Ajouter à la corbeille" class="button-base">Ajouter à la corbeille</button>
 {{ form_end(form) }}

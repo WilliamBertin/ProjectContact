@@ -1,0 +1,109 @@
+.deploy-icon {
+  position: relative;
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+  position: absolute;
+  bottom: 10px;
+  right:5px;
+
+  &:before, &:after {
+    content: '';
+    position: absolute;
+    background: black;
+    transition: 150ms all ease-out;
+  }
+
+  &:before {
+    top: 11.25px;
+    left: 5px;
+    right: 5px;
+    height: 2.5px;
+    }
+
+  &:after {
+    top: 5px;
+    left: 11.25px;
+    bottom: 5px;
+    width: 2.5px;
+  }
+  &.deployed {
+    &:after {
+      transform: rotate(90deg);
+    }
+  }
+}
+
+.button-base {
+  display: inline-block;
+  cursor: pointer;
+  position: relative;
+  background: none;
+  color: black;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 0.2em solid black;
+  padding: 0.5em 1em;
+  margin: 0 15px;
+  min-width: 200px;
+  &::before {
+      content: "";
+      display: block;
+      position: absolute;
+      width: 10%;
+      background: white;
+      height: 0.3em;
+      right: 20%;
+      top: -0.21em;
+      transform: skewX(-45deg);
+      -webkit-transition: all 0.45s cubic-bezier(0.86, 0, 0.07, 1);
+      transition: all 0.45s cubic-bezier(0.86, 0, 0.07, 1);
+  }
+
+  &::after {
+      content: "";
+      display: block;
+      position: absolute;
+      width: 10%;
+      background: white;
+      height: 0.3em;
+      left: 20%;
+      bottom: -0.25em;
+      transform: skewX(45deg);
+      -webkit-transition: all 0.45 cubic-bezier(0.86, 0, 0.07, 1);
+      transition: all 0.45s cubic-bezier(0.86, 0, 0.07, 1);
+  }
+
+  &:hover::before {
+    right: 80%;
+  }
+
+  &:hover::after {
+    left: 80%;
+  }
+}
+
+.validate-icon {
+  color: #270;
+  position: absolute;
+  margin-left: 3px;
+  margin-top: 4px;
+  width: 14px;
+  height: 8px;
+  border-bottom: solid 3px currentColor;
+  border-left: solid 3px currentColor;
+  -webkit-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
+
+.icon-contact {
+    background:url('/images/icon-contact.png');
+}
+
+.icon-address-book {
+    background:url('/images/icon-address-book.png');
+}
+
+.icon-trash {
+    background:url('/images/icon-trash.png');
+}

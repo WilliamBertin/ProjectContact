@@ -1,0 +1,12 @@
+.notice-contact-container-content 
+{
+	margin: 10px 0;
+	padding: 10px;
+	border-radius: 3px;
+	background-color: #DFF2BF;
+	animation-duration: 1.5s; 
+	&__message {
+		margin: 25px;
+		color: #270;
+	}
+}

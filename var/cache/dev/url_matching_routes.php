@@ -15,7 +15,7 @@ return [
         '/_profiler/open' => [[['_route' => '_profiler_open_file', '_controller' => 'web_profiler.controller.profiler::openAction'], null, null, null, false, false, null]],
         '/contact' => [
             [['_route' => 'oc_contact_index', '_controller' => 'App\\Controller\\ContactController::index'], null, null, null, true, false, null],
-            [['_route' => 'oc_contact_view', '_controller' => 'App\\Controller\\ContactController::view'], null, null, null, true, false, null],
+            [['_route' => 'oc_contact_view', '_controller' => 'App\\Controller\\ContactController::trash'], null, null, null, true, false, null],
         ],
         '/contact/add' => [[['_route' => 'oc_contact_add', '_controller' => 'App\\Controller\\ContactController::add'], null, null, null, false, false, null]],
     ],

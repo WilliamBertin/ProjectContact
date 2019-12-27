@@ -1,11 +1,4 @@
-<div class="form-add-contact-container">
-
-	<div class="form-add-contact-container__addIcon addIcon" id="add-contact"></div>
-	<div class="form-add-contact-container__addIcon-title">Ajouter un contact</div>
-</div>
-
-<div class="form-add-contact-container__form" id="add-form">
-{{ form_start(form) }}
+{{ form_start(form, {'method' : 'POST'}) }}
 
     <div class="form-field">
         {{ form_widget(form.firstname) }} 
@@ -22,9 +15,6 @@
         {{ form_errors(form.email) }}
     </div>
 
-    <button id="#addForm-submit" type="submit" value="Ajouter" class="button-base">Ajouter</button>
+    <button type="submit" value="Ajouter" class="button-base">Ajouter</button>
 
 {{ form_end(form) }}
-
-</div>
-<div class="button"></div>

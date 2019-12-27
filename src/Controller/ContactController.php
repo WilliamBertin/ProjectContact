@@ -22,6 +22,12 @@ use Doctrine\ORM\EntityManagerInterface;
  */
 class ContactController extends AbstractController
 {
+
+	protected function addFlash($type, $message)
+    {
+        $this->container->get('session')->getFlashBag()->add($type, $message);
+    }
+
 	/**
  	* Index action
  	* @param  Environment $twig [Template to return]
@@ -51,11 +57,12 @@ class ContactController extends AbstractController
 		if ($form->isSubmitted() && $form->isValid())
 		{
 			$contact = $form->getData();
-
 			$entityManager = $this->getDoctrine()->getManager();
         	$entityManager->persist($contact);
         	$entityManager->flush();
 		
+			$this->addFlash('success', 'Contact ajouté à votre répertoire');
+
 			return $this->redirectToRoute('oc_contact_index');
 		}
 
@@ -71,11 +78,11 @@ class ContactController extends AbstractController
 	public function view(Environment $twig)
 	{
 		$entityManager = $this->getDoctrine()->getManager();
-		$contacts = $entityManager->getRepository(Contact::class)->findAll();
+		$contacts = $entityManager->getRepository(Contact::class)->findBy(array('isTrash' => false));
 		$content = '';
 		if (empty($contacts))
 		{
-			return new Response('Votre liste de contact est vide pour le moment.');
+			return new Response('<div class="contactApp-container__content-notice">Votre liste de contact est vide pour le moment.</div>');
 		}
 		else {
 			foreach ($contacts as $contact) 
@@ -94,21 +101,75 @@ class ContactController extends AbstractController
 	/**
 	 * @Route("/edit/{id}", name="oc_contact_edit", requirements={"id" ="\d+"})
 	 */
-	public function edit(int $id, Request $request, Contact $contact): Response
+	public function edit(int $id, bool $isTrash = false, Request $request, Contact $contact, Environment $twig): Response
 	{
 		$form = $this->createForm(ContactForm::class, $contact);
 
 		$form->handleRequest($request);
+		$entityManager = $this->getDoctrine()->getManager();
 
-		if ($form->isSubmitted() && $form->isValid())
+		if ($form->isSubmitted() && $form->isValid() && $request->request->has('edit'))
 		{
+			$isTrash ?: $contact->setIsTrash(false);
 			$contact = $form->getData();
-			$entityManager = $this->getDoctrine()->getManager();
-        	$entityManager->flush();
 		
+        	$entityManager->flush();
+
+		 	$this->addFlash('success', 'Contact édité');
+
 			return $this->redirectToRoute('oc_contact_index');
 		}
+		else if ($form->isSubmitted() && $form->isValid() && $request->request->has('trash'))
+		{
+			$contact = $form->getData();
+			$contact->setIsTrash(true);
+
+        	$entityManager->flush();
+
+        	$this->addFlash('success', 'Contact ajouté à votre corbeille');
+
+			return $this->redirectToRoute('oc_contact_index');
+		}
+		else if ($form->isSubmitted() && $form->isValid() && $request->request->has('delete'))
+		{
+			$contact = $entityManager->getRepository(Contact::class)->find($id);
+			$entityManager->remove($contact);
+        	$entityManager->flush();
+
+        	$this->addFlash('success', 'Contact supprimé définitivement');
+
+			return $this->redirectToRoute('oc_contact_index');
+		}
+		$content = '';
+		$this->addFlash('error', 'Un problème est survenu');
 		$content = $twig->render('index.html.twig');
 		return new Response($content);	
+	}
+
+	/**
+ 	* @Route("/", name="oc_contact_view")
+ 	*/
+	public function trash(Environment $twig)
+	{
+		$entityManager = $this->getDoctrine()->getManager();
+		$contacts = $entityManager->getRepository(Contact::class)->findBy(array('isTrash' => true));
+		$content = '';
+		if (empty($contacts))
+		{
+			$content = $twig->render('trash.html.twig', array('emptyTrash' => true));
+			return new Response($content);
+		}
+		else {
+			foreach ($contacts as $contact) 
+			{
+				 $form    =  $this->createForm(ContactForm::class, $contact, array (
+				'action'  => $this->generateUrl('oc_contact_edit', ['id' => $contact->getId(), 'isTrash' => true]),
+				'method'  => 'POST'));
+				 $content .= $twig->render('trash.html.twig', [
+	            'form'    => $form->createView()
+	            ]);
+			}
+		}
+		return new Response($content);
 	}
 }
