@@ -21,8 +21,13 @@ namespace Symfony\Component\Intl\Data\Bundle\Reader;
 interface BundleReaderInterface
 {
     /**
+     * Reads a resource bundle.
+     *
+     * @param string $path   The path to the resource bundle
+     * @param string $locale The locale to read
+     *
      * @return mixed returns an array or {@link \ArrayAccess} instance for
      *               complex data, a scalar value otherwise
      */
-    public function read(string $path, string $locale);
+    public function read($path, $locale);
 }

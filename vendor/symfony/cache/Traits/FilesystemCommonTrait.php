@@ -51,7 +51,7 @@ trait FilesystemCommonTrait
     /**
      * {@inheritdoc}
      */
-    protected function doClear(string $namespace)
+    protected function doClear($namespace)
     {
         $ok = true;
 

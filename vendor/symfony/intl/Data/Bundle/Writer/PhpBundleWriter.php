@@ -23,7 +23,7 @@ class PhpBundleWriter implements BundleWriterInterface
     /**
      * {@inheritdoc}
      */
-    public function write(string $path, string $locale, $data)
+    public function write($path, $locale, $data)
     {
         $template = <<<'TEMPLATE'
 <?php

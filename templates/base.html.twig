@@ -5,7 +5,8 @@
 <head>
   <meta charset="UTF-8">
   {% block stylesheet %}
-    <link rel="stylesheet" href="{{ asset('build/app.css') }}" /> 
+    <link rel="stylesheet" href="{{ asset('build/app.css') }}" />
+    <link rel="icon" type="image/png" href="{{ asset('images/logo.png') }}" />
   {% endblock %}
   <title>
     {% block title %} {{ sitename }} {% endblock %}
@@ -19,7 +20,12 @@
   {% endblock %}
 
   <div class="header-container">
+     <img class="header-container__logo" src="{{ asset('images/logo.png') }}"/>
      <div class="header-container__content"> {{ sitename }} </div>
+     <div class="header-container__menu">
+        <a href="{{ path('contact_index') }}"><img src="{{ asset('images/icon-home.png') }}"/>Accueil</a>
+        <a href="{{ path('contact_api_index') }}"><img src="{{ asset('images/icon-api.png') }}"/>Documentation API</a>
+    </div>
   </div>
   <div class="overlay">
   </div>
@@ -29,7 +35,8 @@
      {% endblock %}
   </div>
   <footer>
-    <div class="footer-content">{% block footer %} Developed by {{ webmaster }}  {% endblock %} </div>
+    <img class="footer-logo" src="{{ asset('images/logo.png') }}" />
+    <div class="footer-content">{% block footer %} @WilliamBertin - v1.0 - 28/12/2019 - will.bertin@outlook.com {% endblock %} </div>
   </footer>
 </body>
 </div>

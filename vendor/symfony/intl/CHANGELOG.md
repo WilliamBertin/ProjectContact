@@ -1,11 +1,6 @@
 CHANGELOG
 =========
 
-5.0.0
------
-
- * removed `ResourceBundle` namespace
-
 4.4.0
 -----
 

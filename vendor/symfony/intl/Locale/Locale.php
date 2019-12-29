@@ -52,7 +52,7 @@ abstract class Locale
      *
      * @throws MethodNotImplementedException
      */
-    public static function acceptFromHttp(string $header)
+    public static function acceptFromHttp($header)
     {
         throw new MethodNotImplementedException(__METHOD__);
     }
@@ -63,10 +63,14 @@ abstract class Locale
      * This polyfill doesn't implement the full-spec algorithm. It only
      * canonicalizes locale strings handled by the `LocaleBundle` class.
      *
+     * @param string $locale
+     *
      * @return string
      */
-    public static function canonicalize(string $locale)
+    public static function canonicalize($locale)
     {
+        $locale = (string) $locale;
+
         if ('' === $locale || '.' === $locale[0]) {
             return self::getDefault();
         }
@@ -105,8 +109,9 @@ abstract class Locale
     /**
      * Not supported. Checks if a language tag filter matches with locale.
      *
-     * @param string $langtag The language tag to check
-     * @param string $locale  The language range to check against
+     * @param string $langtag      The language tag to check
+     * @param string $locale       The language range to check against
+     * @param bool   $canonicalize
      *
      * @return string The corresponding locale code
      *
@@ -114,7 +119,7 @@ abstract class Locale
      *
      * @throws MethodNotImplementedException
      */
-    public static function filterMatches(string $langtag, string $locale, bool $canonicalize = false)
+    public static function filterMatches($langtag, $locale, $canonicalize = false)
     {
         throw new MethodNotImplementedException(__METHOD__);
     }
@@ -130,7 +135,7 @@ abstract class Locale
      *
      * @throws MethodNotImplementedException
      */
-    public static function getAllVariants(string $locale)
+    public static function getAllVariants($locale)
     {
         throw new MethodNotImplementedException(__METHOD__);
     }
@@ -159,7 +164,7 @@ abstract class Locale
      *
      * @throws MethodNotImplementedException
      */
-    public static function getDisplayLanguage(string $locale, string $inLocale = null)
+    public static function getDisplayLanguage($locale, $inLocale = null)
     {
         throw new MethodNotImplementedException(__METHOD__);
     }
@@ -176,7 +181,7 @@ abstract class Locale
      *
      * @throws MethodNotImplementedException
      */
-    public static function getDisplayName(string $locale, string $inLocale = null)
+    public static function getDisplayName($locale, $inLocale = null)
     {
         throw new MethodNotImplementedException(__METHOD__);
     }
@@ -193,7 +198,7 @@ abstract class Locale
      *
      * @throws MethodNotImplementedException
      */
-    public static function getDisplayRegion(string $locale, string $inLocale = null)
+    public static function getDisplayRegion($locale, $inLocale = null)
     {
         throw new MethodNotImplementedException(__METHOD__);
     }
@@ -210,7 +215,7 @@ abstract class Locale
      *
      * @throws MethodNotImplementedException
      */
-    public static function getDisplayScript(string $locale, string $inLocale = null)
+    public static function getDisplayScript($locale, $inLocale = null)
     {
         throw new MethodNotImplementedException(__METHOD__);
     }
@@ -227,7 +232,7 @@ abstract class Locale
      *
      * @throws MethodNotImplementedException
      */
-    public static function getDisplayVariant(string $locale, string $inLocale = null)
+    public static function getDisplayVariant($locale, $inLocale = null)
     {
         throw new MethodNotImplementedException(__METHOD__);
     }
@@ -243,7 +248,7 @@ abstract class Locale
      *
      * @throws MethodNotImplementedException
      */
-    public static function getKeywords(string $locale)
+    public static function getKeywords($locale)
     {
         throw new MethodNotImplementedException(__METHOD__);
     }
@@ -259,7 +264,7 @@ abstract class Locale
      *
      * @throws MethodNotImplementedException
      */
-    public static function getPrimaryLanguage(string $locale)
+    public static function getPrimaryLanguage($locale)
     {
         throw new MethodNotImplementedException(__METHOD__);
     }
@@ -275,7 +280,7 @@ abstract class Locale
      *
      * @throws MethodNotImplementedException
      */
-    public static function getRegion(string $locale)
+    public static function getRegion($locale)
     {
         throw new MethodNotImplementedException(__METHOD__);
     }
@@ -291,7 +296,7 @@ abstract class Locale
      *
      * @throws MethodNotImplementedException
      */
-    public static function getScript(string $locale)
+    public static function getScript($locale)
     {
         throw new MethodNotImplementedException(__METHOD__);
     }
@@ -308,7 +313,7 @@ abstract class Locale
      *
      * @throws MethodNotImplementedException
      */
-    public static function lookup(array $langtag, string $locale, bool $canonicalize = false, string $default = null)
+    public static function lookup(array $langtag, $locale, $canonicalize = false, $default = null)
     {
         throw new MethodNotImplementedException(__METHOD__);
     }
@@ -324,7 +329,7 @@ abstract class Locale
      *
      * @throws MethodNotImplementedException
      */
-    public static function parseLocale(string $locale)
+    public static function parseLocale($locale)
     {
         throw new MethodNotImplementedException(__METHOD__);
     }
@@ -332,13 +337,15 @@ abstract class Locale
     /**
      * Not supported. Sets the default runtime locale.
      *
+     * @param string $locale The locale code
+     *
      * @return bool true on success or false on failure
      *
      * @see https://php.net/locale.setdefault
      *
      * @throws MethodNotImplementedException
      */
-    public static function setDefault(string $locale)
+    public static function setDefault($locale)
     {
         if ('en' !== $locale) {
             throw new MethodNotImplementedException(__METHOD__);

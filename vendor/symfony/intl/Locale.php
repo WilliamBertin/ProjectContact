@@ -60,6 +60,8 @@ final class Locale extends \Locale
      * the default fallback locale configured with {@link setDefaultFallback()}.
      * The default fallback locale has no fallback.
      *
+     * @param string $locale The ICU locale code to find the fallback for
+     *
      * @return string|null The ICU locale code of the fallback locale, or null
      *                     if no fallback exists
      */

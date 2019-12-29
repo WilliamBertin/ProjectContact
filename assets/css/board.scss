@@ -1,0 +1,23 @@
+.divTable{
+  display: table;
+  width: 100%;
+  background: white;
+  border: 5px solid #000;
+}
+.divTableRow {
+  display: table-row;
+  font-weight: normal;
+}
+.divTableHeading {
+  background-color: #EEE;
+  font-weight: 700;
+   display: table-cell;
+}
+.divTableCell {
+  border: 1px solid #999999;
+  display: table-cell;
+  padding: 3px 10px;
+}
+.divTableBody {
+  display: table-row-group;
+}

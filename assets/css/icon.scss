@@ -1,11 +1,9 @@
 .deploy-icon {
-  position: relative;
   width: 25px;
   height: 25px;
   cursor: pointer;
-  position: absolute;
-  bottom: 10px;
-  right:5px;
+  position: relative;
+  top: 30px;
 
   &:before, &:after {
     content: '';
@@ -46,6 +44,8 @@
   padding: 0.5em 1em;
   margin: 0 15px;
   min-width: 200px;
+  font-size: 13px;
+  font-weight: 700;
   &::before {
       content: "";
       display: block;
@@ -81,6 +81,10 @@
   &:hover::after {
     left: 80%;
   }
+  &:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+  }
 }
 
 .validate-icon {
@@ -106,4 +110,12 @@
 
 .icon-trash {
     background:url('/images/icon-trash.png');
+}
+
+.icon-home {
+    background:url('/images/icon-home.png');
+}
+
+.icon-api {
+    background:url('/images/icon-api.png');
 }

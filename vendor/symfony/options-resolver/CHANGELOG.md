@@ -1,11 +1,6 @@
 CHANGELOG
 =========
 
-5.0.0
------
-
- * added argument `$triggerDeprecation` to `OptionsResolver::offsetGet()`
-
 4.3.0
 -----
 

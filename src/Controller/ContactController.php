@@ -33,7 +33,7 @@ class ContactController extends AbstractController
  	* @param  Environment $twig [Template to return]
  	* @return Response
  	*
- 	* @Route("/", name="oc_contact_index")
+ 	* @Route("/", name="contact_index")
  	*/
 	public function index(Environment $twig): Response
 	{
@@ -42,14 +42,14 @@ class ContactController extends AbstractController
 	}
 
 	/**
- 	* @Route("/add", name="oc_contact_add")
+ 	* @Route("/add", name="contact_add")
  	*/
 	public function add(Environment $twig, Request $request): Response
 	{
 		$contact = new Contact();
 
 		$form = $this->createForm(ContactForm::class, $contact, array (
-			'action' => $this->generateUrl('oc_contact_add'),
+			'action' => $this->generateUrl('contact_add'),
 			'method' => 'POST'));
 
 		$form->handleRequest($request);
@@ -63,7 +63,7 @@ class ContactController extends AbstractController
 		
 			$this->addFlash('success', 'Contact ajouté à votre répertoire');
 
-			return $this->redirectToRoute('oc_contact_index');
+			return $this->redirectToRoute('contact_index');
 		}
 
 		$content = $twig->render('add.html.twig', array(
@@ -73,7 +73,7 @@ class ContactController extends AbstractController
 	}
 
 	/**
- 	* @Route("/", name="oc_contact_view")
+ 	* @Route("/", name="contact_view")
  	*/
 	public function view(Environment $twig)
 	{
@@ -88,7 +88,7 @@ class ContactController extends AbstractController
 			foreach ($contacts as $contact) 
 			{
 				 $form    = $this->createForm(ContactForm::class, $contact, array (
-				'action'  => $this->generateUrl('oc_contact_edit', ['id' => $contact->getId()]),
+				'action'  => $this->generateUrl('contact_edit', ['id' => $contact->getId()]),
 				'method'  => 'POST'));
 				 $content .= $twig->render('edit.html.twig', [
 	            'form'    => $form->createView()
@@ -99,7 +99,7 @@ class ContactController extends AbstractController
 	}
 
 	/**
-	 * @Route("/edit/{id}", name="oc_contact_edit", requirements={"id" ="\d+"})
+	 * @Route("/edit/{id}", name="contact_edit", requirements={"id" ="\d+"})
 	 */
 	public function edit(int $id, bool $isTrash = false, Request $request, Contact $contact, Environment $twig): Response
 	{
@@ -117,7 +117,7 @@ class ContactController extends AbstractController
 
 		 	$this->addFlash('success', 'Contact édité');
 
-			return $this->redirectToRoute('oc_contact_index');
+			return $this->redirectToRoute('contact_index');
 		}
 		else if ($form->isSubmitted() && $form->isValid() && $request->request->has('trash'))
 		{
@@ -128,7 +128,7 @@ class ContactController extends AbstractController
 
         	$this->addFlash('success', 'Contact ajouté à votre corbeille');
 
-			return $this->redirectToRoute('oc_contact_index');
+			return $this->redirectToRoute('contact_index');
 		}
 		else if ($form->isSubmitted() && $form->isValid() && $request->request->has('delete'))
 		{
@@ -138,7 +138,7 @@ class ContactController extends AbstractController
 
         	$this->addFlash('success', 'Contact supprimé définitivement');
 
-			return $this->redirectToRoute('oc_contact_index');
+			return $this->redirectToRoute('contact_index');
 		}
 		$content = '';
 		$this->addFlash('error', 'Un problème est survenu');
@@ -147,7 +147,7 @@ class ContactController extends AbstractController
 	}
 
 	/**
- 	* @Route("/", name="oc_contact_view")
+ 	* @Route("/", name="contact_trash")
  	*/
 	public function trash(Environment $twig)
 	{
@@ -163,7 +163,7 @@ class ContactController extends AbstractController
 			foreach ($contacts as $contact) 
 			{
 				 $form    =  $this->createForm(ContactForm::class, $contact, array (
-				'action'  => $this->generateUrl('oc_contact_edit', ['id' => $contact->getId(), 'isTrash' => true]),
+				'action'  => $this->generateUrl('contact_edit', ['id' => $contact->getId(), 'isTrash' => true]),
 				'method'  => 'POST'));
 				 $content .= $twig->render('trash.html.twig', [
 	            'form'    => $form->createView()

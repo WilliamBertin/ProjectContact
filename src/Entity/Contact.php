@@ -72,13 +72,13 @@ class Contact
         return $this->isTrash;
     }
 
-    public function setFirstname(string $firstname)
+    public function setFirstname(?string $firstname)
     {
         $this->firstname = $firstname;
         return $this->firstname;
     }
 
-    public function setLastname(string $lastname)
+    public function setLastname(?string $lastname)
     {
         $this->lastname = $lastname;
         return $this->lastname;

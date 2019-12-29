@@ -1,0 +1,72 @@
+{# templates/api.html.twig #}
+
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+<div class="divTable" style="border: 5px solid #000;" >
+	<div class="divTableBody">
+		<div class="divTableRow">
+			<div class="divTableHeading">URL</div>
+			<div class="divTableHeading">DESCRIPTION</div>
+		</div>
+		<div class="divTableRow">
+			<div class="divTableCell">/contact/api/viewById/<b>{id}</b></div>
+			<div class="divTableCell">Retourne les informations du contact dont l'id est celui envoié en paramètre</div>
+		</div>
+		<div class="divTableRow">
+			<div class="divTableCell">/contact/api/viewByFirstname/<b>{firstname}</b></div>
+			<div class="divTableCell">Retourne les informations du/des contact(s) dont le nom est celui envoié en paramètre</div>
+		</div>
+		<div class="divTableRow">
+			<div class="divTableCell">/contact/api/viewByLastname/<b>{lastname}</b></div>
+			<div class="divTableCell">Retourne les informations du/des contact(s) dont le prénom est celui envoié en paramètre</div>
+		</div>
+		<div class="divTableRow">
+			<div class="divTableCell">/contact/api/viewByFullname/<b>{fullname}</b></div>
+			<div class="divTableCell">Retourne les informations du/des contact(s) dont le nom et prénom est celui envoié en paramètre</div>
+		</div>
+		<div class="divTableRow">
+			<div class="divTableCell">/contact/api/viewByEmail/<b>{email}</b></div>
+			<div class="divTableCell">Retourne les informations du/des contact(s) dont l'e-mail est celui envoié en paramètre</div>
+		</div>
+		<div class="divTableRow">
+			<div class="divTableCell">/contact/api/search/<b>{search}</b></div>
+			<div class="divTableCell">Retourne les informations du/des contact(s) dont le nom, prénom, nom et prenom ou email sont relatif à la recherche</div>
+		</div>
+		<div class="divTableRow">
+			<div class="divTableCell">/contact/api/viewAll</div>
+			<div class="divTableCell">Retourne toute la liste de contact (répertoire + corbeille)</div>
+		</div>
+		<div class="divTableRow">
+			<div class="divTableCell">/contact/api/viewContacts</div>
+			<div class="divTableCell">Retourne les contacts du répertoire</div>
+		</div>
+		<div class="divTableRow">
+			<div class="divTableCell">/contact/api/viewTrash</div>
+			<div class="divTableCell">Retourne les contacts de la corbeille</div>
+		</div>
+		<div class="divTableRow">
+			<div class="divTableCell">/contact/api/trash/<b>{id}</b></div>
+			<div class="divTableCell">Envoie le contact à la corbeille</div>
+		</div>
+		<div class="divTableRow">
+			<div class="divTableCell">/contact/api/removeFromtrash/<b>{id}</b></div>
+			<div class="divTableCell">Retire le contact de la corbeille et le remet dans le répertoire</div>
+		</div>
+		<div class="divTableRow">
+			<div class="divTableCell">/contact/api/delete/<b>{id}</b></div>
+			<div class="divTableCell">Supprime le contact définitivement</div>
+		</div>
+		<div class="divTableRow">
+			<div class="divTableCell">/contact/api/edit/<b>{id}</b>?firstname=<b>{firstname}</b>&lastname=<b>{lastname}</b>&fullname=<b>{fullname}</b>&email=<b>{email}</b></div>
+			<div class="divTableCell">Édite le contact (les paramètres firstname & lastname sont optionnels)</div>
+		</div>
+		<div class="divTableRow">
+			<div class="divTableCell">/contact/api/add/?firstname=<b>{firstname}</b>&lastname=<b>{lastname}</b>&fullname=<b>{fullname}</b>&email=<b>{email}</b></div>
+			<div class="divTableCell">Ajoute le contact (les paramètres firstname & lastname sont optionnels)</div>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

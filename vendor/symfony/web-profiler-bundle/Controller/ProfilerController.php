@@ -27,7 +27,7 @@ use Twig\Environment;
 /**
  * @author Fabien Potencier <fabien@symfony.com>
  *
- * @internal
+ * @internal since Symfony 4.4
  */
 class ProfilerController
 {
@@ -66,11 +66,13 @@ class ProfilerController
     /**
      * Renders a profiler panel for the given token.
      *
+     * @param string $token The profiler token
+     *
      * @return Response A Response instance
      *
      * @throws NotFoundHttpException
      */
-    public function panelAction(Request $request, string $token)
+    public function panelAction(Request $request, $token)
     {
         $this->denyAccessIfProfilerDisabled();
 
@@ -125,11 +127,13 @@ class ProfilerController
     /**
      * Renders the Web Debug Toolbar.
      *
+     * @param string $token The profiler token
+     *
      * @return Response A Response instance
      *
      * @throws NotFoundHttpException
      */
-    public function toolbarAction(Request $request, string $token = null)
+    public function toolbarAction(Request $request, $token)
     {
         if (null === $this->profiler) {
             throw new NotFoundHttpException('The profiler must be enabled.');
@@ -224,11 +228,13 @@ class ProfilerController
     /**
      * Renders the search results.
      *
+     * @param string $token The token
+     *
      * @return Response A Response instance
      *
      * @throws NotFoundHttpException
      */
-    public function searchResultsAction(Request $request, string $token)
+    public function searchResultsAction(Request $request, $token)
     {
         $this->denyAccessIfProfilerDisabled();
 

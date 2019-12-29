@@ -22,6 +22,16 @@ jQuery(document).ready(function() {
 		jQuery('.overlay').toggle();
 	});
 
+	jQuery("#contact_form_fullname").focus(function() {
+		if (jQuery('#contact_form_firstname').val() && jQuery('#contact_form_lastname').val()) {
+			this.value = jQuery('#contact_form_firstname').val()+' '+jQuery('#contact_form_lastname').val();
+		}
+	});
+
+	jQuery(".view-list form :input").change(function() 
+	{
+		jQuery(this).closest('form').find('button').first().prop("disabled", false) 
+	});
 
 	if (jQuery('.notice-contact-container-content')){
 		setTimeout(function(){

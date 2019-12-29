@@ -295,6 +295,13 @@
     <service id="EasyCorp\EasyLog\EasyLogHandler" class="EasyCorp\EasyLog\EasyLogHandler" public="false">
       <argument>C:\Users\willi\Desktop\Symfony\Project\var\log/dev.log</argument>
     </service>
+    <service id="App\Controller\ContactApiController" class="App\Controller\ContactApiController" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+      <tag name="container.service_subscriber"/>
+      <call method="setContainer">
+        <argument type="service" id=".service_locator.vdmMuyE.App\Controller\ContactApiController"/>
+      </call>
+    </service>
     <service id="App\Controller\ContactController" class="App\Controller\ContactController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
@@ -1526,14 +1533,6 @@
         <argument>2048</argument>
       </call>
       <call method="addListener">
-        <argument>console.command</argument>
-        <argument type="collection">
-          <argument type="service" id="debug.debug_handlers_listener"/>
-          <argument>configure</argument>
-        </argument>
-        <argument>2048</argument>
-      </call>
-      <call method="addListener">
         <argument>kernel.request</argument>
         <argument type="collection">
           <argument type="service" id="router_listener"/>
@@ -2387,6 +2386,14 @@
       <argument type="service" id="profiler" on-invalid="null"/>
       <argument type="service" id="twig"/>
       <argument type="service" id="router.default" on-invalid="null"/>
+    </service>
+    <service id="web_profiler.controller.exception" class="Symfony\Bundle\WebProfilerBundle\Controller\ExceptionController" public="true">
+      <argument type="service" id="profiler" on-invalid="null"/>
+      <argument type="service" id="twig"/>
+      <argument>true</argument>
+      <argument type="service" id="debug.file_link_formatter"/>
+      <argument type="service" id="error_handler.error_renderer.html"/>
+      <deprecated>The "%service_id%" service is deprecated since Symfony 4.4, use the "web_profiler.controller.exception_panel" service instead.</deprecated>
     </service>
     <service id="web_profiler.controller.exception_panel" class="Symfony\Bundle\WebProfilerBundle\Controller\ExceptionPanelController" public="true">
       <argument type="service" id="error_handler.error_renderer.html"/>
@@ -3851,6 +3858,9 @@
         <argument key="_default" type="service" id="webpack_encore.entrypoint_lookup[_default]"/>
       </argument>
     </service>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\ContactApiController" class="App\Controller\ContactApiController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\ContactApiController" class="App\Controller\ContactApiController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Controller\ContactApiController" class="App\Controller\ContactApiController" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\ContactController" class="App\Controller\ContactController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\ContactController" class="App\Controller\ContactController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\ContactController" class="App\Controller\ContactController" autowire="true" autoconfigure="true" abstract="true"/>
@@ -4052,14 +4062,16 @@
         <argument key="twig" type="service" id="twig"/>
       </argument>
     </service>
-    <service id=".service_locator.uI1BAPQ" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+    <service id=".service_locator.AH0Bv4h" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
       <argument type="collection">
+        <argument key="App\Controller\ContactApiController::index" type="service" id=".service_locator.4IhWuwy"/>
         <argument key="App\Controller\ContactController::add" type="service" id=".service_locator.4IhWuwy"/>
         <argument key="App\Controller\ContactController::edit" type="service" id=".service_locator.8SPuZC2"/>
         <argument key="App\Controller\ContactController::index" type="service" id=".service_locator.4IhWuwy"/>
         <argument key="App\Controller\ContactController::trash" type="service" id=".service_locator.4IhWuwy"/>
         <argument key="App\Controller\ContactController::view" type="service" id=".service_locator.4IhWuwy"/>
+        <argument key="App\Controller\ContactApiController:index" type="service" id=".service_locator.4IhWuwy"/>
         <argument key="App\Controller\ContactController:add" type="service" id=".service_locator.4IhWuwy"/>
         <argument key="App\Controller\ContactController:edit" type="service" id=".service_locator.8SPuZC2"/>
         <argument key="App\Controller\ContactController:index" type="service" id=".service_locator.4IhWuwy"/>
@@ -4266,6 +4278,12 @@
         <argument key="twig" type="service" id="twig" on-invalid="ignore"/>
       </argument>
     </service>
+    <service id=".service_locator.vdmMuyE.App\Controller\ContactApiController" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+      <tag name="container.service_locator_context" id="App\Controller\ContactApiController"/>
+      <argument>App\Controller\ContactApiController</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.vdmMuyE" method="withContext"/>
+    </service>
     <service id=".service_locator.vdmMuyE.App\Controller\ContactController" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator_context" id="App\Controller\ContactController"/>
       <argument>App\Controller\ContactController</argument>
@@ -4364,12 +4382,12 @@
     <service id="debug.argument_resolver.request.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\RequestValueResolver" public="false"/>
     <service id="debug.argument_resolver.session.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\SessionValueResolver" public="false"/>
     <service id="debug.argument_resolver.service.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver" public="false">
-      <argument type="service" id=".service_locator.uI1BAPQ"/>
+      <argument type="service" id=".service_locator.AH0Bv4h"/>
     </service>
     <service id="debug.argument_resolver.default.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver" public="false"/>
     <service id="debug.argument_resolver.variadic.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\VariadicValueResolver" public="false"/>
     <service id="debug.argument_resolver.not_tagged_controller.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver" public="false">
-      <argument type="service" id=".service_locator.uI1BAPQ"/>
+      <argument type="service" id=".service_locator.AH0Bv4h"/>
     </service>
     <service id="fos_rest.serializer.form_error_handler.inner" class="JMS\Serializer\Handler\FormErrorHandler" public="false">
       <argument>null</argument>
@@ -4733,7 +4751,7 @@
     <service id="Symfony\WebpackEncoreBundle\Asset\EntrypointLookupInterface" alias="webpack_encore.entrypoint_lookup[_default]"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.CmORmuK" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem" public="false"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.uI1BAPQ"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.AH0Bv4h"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="Psr\Log\LoggerInterface $requestLogger" alias="monolog.logger.request"/>
     <service id="Psr\Log\LoggerInterface $consoleLogger" alias="monolog.logger.console"/>

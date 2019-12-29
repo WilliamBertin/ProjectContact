@@ -23,7 +23,7 @@ use Twig\TwigFunction;
  *
  * @author Fabien Potencier <fabien@symfony.com>
  *
- * @internal
+ * @internal since Symfony 4.4
  */
 class WebProfilerExtension extends ProfilerExtension
 {
@@ -48,12 +48,18 @@ class WebProfilerExtension extends ProfilerExtension
         $this->dumper->setOutput($this->output = fopen('php://memory', 'r+b'));
     }
 
-    public function enter(Profile $profile): void
+    /**
+     * @return void
+     */
+    public function enter(Profile $profile)
     {
         ++$this->stackLevel;
     }
 
-    public function leave(Profile $profile): void
+    /**
+     * @return void
+     */
+    public function leave(Profile $profile)
     {
         if (0 === --$this->stackLevel) {
             $this->dumper->setOutput($this->output = fopen('php://memory', 'r+b'));
@@ -62,8 +68,10 @@ class WebProfilerExtension extends ProfilerExtension
 
     /**
      * {@inheritdoc}
+     *
+     * @return TwigFunction[]
      */
-    public function getFunctions(): array
+    public function getFunctions()
     {
         return [
             new TwigFunction('profiler_dump', [$this, 'dumpData'], ['is_safe' => ['html'], 'needs_environment' => true]),
@@ -71,7 +79,7 @@ class WebProfilerExtension extends ProfilerExtension
         ];
     }
 
-    public function dumpData(Environment $env, Data $data, int $maxDepth = 0)
+    public function dumpData(Environment $env, Data $data, $maxDepth = 0)
     {
         $this->dumper->setCharset($env->getCharset());
         $this->dumper->dump($data, null, [
@@ -85,7 +93,7 @@ class WebProfilerExtension extends ProfilerExtension
         return str_replace("\n</pre", '</pre', rtrim($dump));
     }
 
-    public function dumpLog(Environment $env, string $message, Data $context = null)
+    public function dumpLog(Environment $env, $message, Data $context = null)
     {
         $message = twig_escape_filter($env, $message);
         $message = preg_replace('/&quot;(.*?)&quot;/', '&quot;<b>$1</b>&quot;', $message);
