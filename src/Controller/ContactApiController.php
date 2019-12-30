@@ -17,7 +17,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use JMS\Serializer\SerializationContext;
 
 /**
- * Class ContactController
+ * Class ContactApiController
  *
  * Define global route to controller
  * @Route("/contact/api")
@@ -25,8 +25,11 @@ use JMS\Serializer\SerializationContext;
 class ContactApiController extends AbstractController
 {
 
-
     /**
+    * Index Action render api twig
+    * @param  Environment $twig
+    * @return Response
+    *
     * @Route("/", name="contact_api_index")
     */
     public function index(Environment $twig): Response
@@ -36,9 +39,13 @@ class ContactApiController extends AbstractController
     }
 
     /**
-     * @Route("/viewById/{id}")
-     * @Method({"GET"})
-     */
+    * viewById Action display information of contact according to id search
+    * @param  int $id id contact
+    * @return mixed
+    *
+    * @Route("/viewById/{id}")
+    * @Method({"GET"})
+    */
     public function viewById(int $id)
     {
         $entityManager = $this->getDoctrine()->getManager();
@@ -55,9 +62,13 @@ class ContactApiController extends AbstractController
     }
 
     /**
-     * @Route("/viewByFirstname/{firstname}")
-     * @Method({"GET"})
-     */
+    * viewByFirstname Action display information of contact according to firstname search
+    * @param  string $firstname firstname of contact
+    * @return mixed
+    *
+    * @Route("/viewByFirstname/{firstname}")
+    * @Method({"GET"})
+    */
     public function viewByFirstname(string $firstname)
     {
         $entityManager = $this->getDoctrine()->getManager();
@@ -74,9 +85,13 @@ class ContactApiController extends AbstractController
     }
 
     /**
-     * @Route("/viewByLastname/{lastname}")
-     * @Method({"GET"})
-     */
+    * viewByLastname Action display information of contact according to lastname search
+    * @param  string $lastname lastname of contact
+    * @return mixed
+    *
+    * @Route("/viewByLastname/{lastname}")
+    * @Method({"GET"})
+    */
     public function viewByLastname(string $lastname)
     {
         $entityManager = $this->getDoctrine()->getManager();
@@ -92,10 +107,14 @@ class ContactApiController extends AbstractController
         return $response;
     }
 
-     /**
-     * @Route("/viewByFullname/{fullname}")
-     * @Method({"GET"})
-     */
+    /**
+    * viewByFullname Action display information of contact according to fullname search
+    * @param  string $fullname fullname of contact
+    * @return mixed
+    *
+    * @Route("/viewByFullname/{fullname}")
+    * @Method({"GET"})
+    */
     public function viewByFullname(string $fullname)
     {
         $entityManager = $this->getDoctrine()->getManager();
@@ -111,10 +130,14 @@ class ContactApiController extends AbstractController
         return $response;
     }
 
-     /**
-     * @Route("/viewByEmail/{email}")
-     * @Method({"GET"})
-     */
+    /**
+    * viewByEmail Action display information of contact according to email search
+    * @param  string $email email of contact
+    * @return mixed
+    *
+    * @Route("/viewByEmail/{email}")
+    * @Method({"GET"})
+    */
     public function viewByEmail(string $email)
     {
         $entityManager = $this->getDoctrine()->getManager();
@@ -130,11 +153,15 @@ class ContactApiController extends AbstractController
         return $response;
     }
 
-     /**
-     * @Route("/search/{search}")
-     * @Method({"GET"})
-     */
-    public function search($search)
+    /**
+    * search Action display information of contact according to search term
+    * @param  string $search term of search can be firstname, lastname, fullname or email
+    * @return mixed
+    *
+    * @Route("/search/{search}")
+    * @Method({"GET"})
+    */
+    public function search(string $search)
     {
         $entityManager = $this->getDoctrine()->getManager();
         
@@ -161,9 +188,12 @@ class ContactApiController extends AbstractController
     }
 
     /**
-     * @Route("/viewAll")
-     * @Method({"GET"})
-     */
+    * viewAll Action display all contact, repository or trash
+    * @return mixed
+    *
+    * @Route("/viewAll")
+    * @Method({"GET"})
+    */
     public function viewAll()
     {
         $entityManager = $this->getDoctrine()->getManager();
@@ -180,9 +210,12 @@ class ContactApiController extends AbstractController
     }
 
     /**
-     * @Route("/viewContacts")
-     * @Method({"GET"})
-     */
+    * viewContacts Action diplay all contact of repository
+    * @return mixed
+    *
+    * @Route("/viewContacts")
+    * @Method({"GET"})
+    */
     public function viewContacts()
     {
         $entityManager = $this->getDoctrine()->getManager();
@@ -198,10 +231,13 @@ class ContactApiController extends AbstractController
         return $response;
     }
 
-     /**
-     * @Route("/viewTrash")
-     * @Method({"GET"})
-     */
+    /**
+    * viewTrash Action display all contact of trash
+    * @return mixed
+    * 
+    * @Route("/viewTrash")
+    * @Method({"GET"}) 
+    */
     public function viewTrash()
     {
         $entityManager = $this->getDoctrine()->getManager();
@@ -218,10 +254,14 @@ class ContactApiController extends AbstractController
     }
 
     /**
-     * @Route("/delete/{id}")
-     * @Method({"DELETE"})
-     */
-    public function delete(int $id)
+    * delete Action delete a contact definitely
+    * @param  int $id id contact
+    * @return JsonReponse
+    *
+    * @Route("/delete/{id}")
+    * @Method({"DELETE"})
+    */
+    public function delete(int $id): JsonResponse
     {
         $entityManager = $this->getDoctrine()->getManager();
         $result = $entityManager->getRepository(Contact::class)->find($id);
@@ -234,10 +274,14 @@ class ContactApiController extends AbstractController
     }
 
     /**
-     * @Route("/trash/{id}")
-     * @Method({"POST"})
-     */
-    public function trash(int $id)
+    * trash Action send a contact to the trash
+    * @param  int $id id contact
+    * @return JsonReponse
+    *
+    * @Route("/trash/{id}")
+    * @Method({"POST"})
+    */
+    public function trash(int $id): JsonResponse
     {
         $entityManager = $this->getDoctrine()->getManager();
         $result = $entityManager->getRepository(Contact::class)->find($id);
@@ -252,10 +296,14 @@ class ContactApiController extends AbstractController
     }
 
     /**
-     * @Route("/removeFromTrash/{id}")
-     * @Method({"POST"})
-     */
-    public function removeFromTrash(int $id)
+    * removeFromTrash Action remove a contact from trash and add it to repository
+    * @param  int $id id contact
+    * @return JsonReponse
+    *
+    * @Route("/removeFromTrash/{id}")
+    * @Method({"POST"})
+    */
+    public function removeFromTrash(int $id): JsonResponse
     {
         $entityManager = $this->getDoctrine()->getManager();
         $result = $entityManager->getRepository(Contact::class)->find($id);
@@ -269,10 +317,14 @@ class ContactApiController extends AbstractController
     }
 
     /**
-     * @Route("/add")
-     * @Method({"POST"})
-     */
-    public function add(Request $request)
+    * add Action add contact
+    * @param  Request $request 
+    * @return JsonReponse 
+    * 
+    * @Route("/add")
+    * @Method({"POST"})
+    */
+    public function add(Request $request): JsonResponse
     {
         $firstname = $request->get('firstname'); 
         $lastname = $request->get('lastname'); 
@@ -296,11 +348,16 @@ class ContactApiController extends AbstractController
         return new JsonResponse(['message' => "Contact créé."], Response::HTTP_CREATED);
     }
 
-     /**
-     * @Route("/edit/{id}")
-     * @Method({"POST"})
-     */
-    public function edit(Request $request, int $id)
+    /**
+    * edit Action edit contact
+    * @param  Request $request 
+    * @param  int     $id      id contact
+    * @return JsonReponse
+    *
+    * @Route("/edit/{id}")
+    * @Method({"POST"})
+    */
+    public function edit(Request $request, int $id): JsonResponse
     {
         $entityManager = $this->getDoctrine()->getManager();
         $result = $entityManager->getRepository(Contact::class)->find($id);
@@ -322,7 +379,7 @@ class ContactApiController extends AbstractController
         $result->setLastname($lastname);
         $result->setFullname($fullname);
         $result->setEmail($email);
-        $entityManager = $this->getDoctrine()->getManager();
+
         $entityManager->persist($result);
         $entityManager->flush();
 

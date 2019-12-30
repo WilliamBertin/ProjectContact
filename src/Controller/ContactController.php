@@ -23,14 +23,20 @@ use Doctrine\ORM\EntityManagerInterface;
 class ContactController extends AbstractController
 {
 
-	protected function addFlash($type, $message)
+	/**
+ 	* addFlash Add notice to body
+ 	* @param  string $type    
+ 	* @param  string $message
+ 	* @return void  
+ 	*/
+	protected function addFlash(string $type, string $message): void
     {
         $this->container->get('session')->getFlashBag()->add($type, $message);
     }
 
 	/**
- 	* Index action
- 	* @param  Environment $twig [Template to return]
+ 	* Index action render index twig
+ 	* @param  Environment $twig
  	* @return Response
  	*
  	* @Route("/", name="contact_index")
@@ -42,6 +48,11 @@ class ContactController extends AbstractController
 	}
 
 	/**
+ 	* Add Action render from add contact and post
+ 	* @param   Environment $twig
+ 	* @param   Request     $request
+ 	* @return  Response
+ 	*
  	* @Route("/add", name="contact_add")
  	*/
 	public function add(Environment $twig, Request $request): Response
@@ -73,9 +84,13 @@ class ContactController extends AbstractController
 	}
 
 	/**
+ 	* View Action render repository of contact
+ 	* @param  Environment $twig 
+ 	* @return Response
+ 	* 
  	* @Route("/", name="contact_view")
  	*/
-	public function view(Environment $twig)
+	public function view(Environment $twig): Response
 	{
 		$entityManager = $this->getDoctrine()->getManager();
 		$contacts = $entityManager->getRepository(Contact::class)->findBy(array('isTrash' => false));
@@ -99,15 +114,23 @@ class ContactController extends AbstractController
 	}
 
 	/**
-	 * @Route("/edit/{id}", name="contact_edit", requirements={"id" ="\d+"})
-	 */
+ 	* Edit Action handle edit form post, trash post and delete post
+ 	* @param  int          $id      id contact
+ 	* @param  bool|boolean $isTrash true if contact is on trash
+ 	* @param  Request      $request 
+ 	* @param  Contact      $contact 
+ 	* @param  Environment  $twig    
+ 	* @return Response 
+ 	*
+ 	* @Route("/edit/{id}", name="contact_edit", requirements={"id" ="\d+"})
+ 	*/
 	public function edit(int $id, bool $isTrash = false, Request $request, Contact $contact, Environment $twig): Response
 	{
 		$form = $this->createForm(ContactForm::class, $contact);
-
 		$form->handleRequest($request);
 		$entityManager = $this->getDoctrine()->getManager();
 
+		//Case of edit contact
 		if ($form->isSubmitted() && $form->isValid() && $request->request->has('edit'))
 		{
 			$isTrash ?: $contact->setIsTrash(false);
@@ -119,6 +142,7 @@ class ContactController extends AbstractController
 
 			return $this->redirectToRoute('contact_index');
 		}
+		//Case of trash contact
 		else if ($form->isSubmitted() && $form->isValid() && $request->request->has('trash'))
 		{
 			$contact = $form->getData();
@@ -130,6 +154,7 @@ class ContactController extends AbstractController
 
 			return $this->redirectToRoute('contact_index');
 		}
+		//Case of delete contact
 		else if ($form->isSubmitted() && $form->isValid() && $request->request->has('delete'))
 		{
 			$contact = $entityManager->getRepository(Contact::class)->find($id);
@@ -140,16 +165,19 @@ class ContactController extends AbstractController
 
 			return $this->redirectToRoute('contact_index');
 		}
-		$content = '';
 		$this->addFlash('error', 'Un problème est survenu');
 		$content = $twig->render('index.html.twig');
 		return new Response($content);	
 	}
 
 	/**
+ 	* Trash action render all contact in trash and post if delete or edit
+ 	* @param  Environment $twig
+ 	* @return Response
+ 	*
  	* @Route("/", name="contact_trash")
  	*/
-	public function trash(Environment $twig)
+	public function trash(Environment $twig): Response
 	{
 		$entityManager = $this->getDoctrine()->getManager();
 		$contacts = $entityManager->getRepository(Contact::class)->findBy(array('isTrash' => true));

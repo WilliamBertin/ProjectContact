@@ -67,7 +67,7 @@ class Contact
         return $this->email;
     }
 
-    public function getIsTrash()
+    public function getIsTrash(): bool
     {
         return $this->isTrash;
     }
