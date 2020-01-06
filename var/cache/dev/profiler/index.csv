@@ -413,3 +413,14 @@ f111db,127.0.0.1,GET,http://127.0.0.1:8000/contact/api/removeFromTrash/2,1577717
 404901,127.0.0.1,GET,http://127.0.0.1:8000/contact/api/viewAll,1577718056,,200
 32a585,127.0.0.1,GET,http://127.0.0.1:8000/contact/api/edit/3?email=margaux.caniot%40mail.com&firstname=Caniot&fullname=Caniot%20Margaux&lastname=Margaux,1577718120,,200
 52ebae,127.0.0.1,GET,http://127.0.0.1:8000/contact/api/viewAll,1577718129,,200
+ed5248,127.0.0.1,GET,http://127.0.0.1:8000/,1578307992,,404
+ccdd06,127.0.0.1,GET,http://127.0.0.1:8000/,1578307994,,404
+180f63,127.0.0.1,GET,http://127.0.0.1:8000/contact,1578308000,,301
+7f4ee0,127.0.0.1,GET,http://127.0.0.1:8000/contact/,1578308001,b837a4,200
+b837a4,127.0.0.1,GET,http://127.0.0.1:8000/contact/,1578308001,,500
+fe9e1e,127.0.0.1,GET,http://127.0.0.1:8000/contact/,1578308072,3b16cf,200
+3b16cf,127.0.0.1,GET,http://127.0.0.1:8000/contact/,1578308072,,500
+797872,127.0.0.1,GET,http://127.0.0.1:8000/_fragment?_path=_format%3Dhtml%26_locale%3Den%26_controller%3DApp%255CController%255CContactController%253A%253Aadd,1578308304,ba4143,200
+f4b623,127.0.0.1,GET,http://127.0.0.1:8000/_fragment?_path=_format%3Dhtml%26_locale%3Den%26_controller%3DApp%255CController%255CContactController%253A%253Aview,1578308305,ba4143,200
+ba12b6,127.0.0.1,GET,http://127.0.0.1:8000/_fragment?_path=_format%3Dhtml%26_locale%3Den%26_controller%3DApp%255CController%255CContactController%253A%253Atrash,1578308305,ba4143,200
+ba4143,127.0.0.1,GET,http://127.0.0.1:8000/contact/,1578308305,,200
