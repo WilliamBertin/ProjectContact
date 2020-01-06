@@ -20,4 +20,8 @@ How to start the project
 4.   On the directory of the project, run bash console and run the command line : php bin/console doctrine:database:create
 5.   Run on your browser the followed url : http://127.0.0.1:8000/contact/
 
-In case of troubleshooting, please contact the author of the application
+
+Troubleshooting : 
+If u have trouble in runnning application, clean the vendor/ directory and run the command followed : composer update
+
+In other case of troubleshooting, please contact the author of the application
