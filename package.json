@@ -22,6 +22,6 @@
     "repository": "https://github.com/WilliamBertin/ProjectContact.git",
     "author": "William <will.bertin@outlook.com>",
     "dependencies": {
-        "jquery": "^3.4.1"
+        "jquery": "^3.5.0"
     }
 }
